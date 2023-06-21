@@ -6,6 +6,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.io.FileInputStream;
+import java.util.Date;
+
 /**
  * Hello world!
  *
@@ -16,56 +19,52 @@ public class App
     {
         System.out.println( "Projected Started..." );
 
-        // session factory ek tarike se connection ka kaam karta hai,, or ek project ke liye
-        // ek hi session factory hona chahiye
-        // hum session factory ko new session factory se object nahi bana sakte becoz ye ek interface hai
-        // toh hume kisi class ki jarurat padegi uska object banane ke liye
-        // jo hai configuration class (org.hibernate) waali
+
+        // Making Session Factory
 //        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-
-
-
-        // hum upar waale step ko aisa bhi kar sakte hai
         Configuration configuration = new Configuration();
         configuration.configure();
-        // waise toh ye automatically detect kar lega hibernat.cfg.xml file ko
-        // but agar kabhi nahi detect kar paya toh hume path provide karna padeg configure method mein
 //        configuration.configure("hibernate.cfg.xml");
         SessionFactory sessionFactory = configuration.buildSessionFactory();
-        // ab hum iss session factory ke object se session nikal sakte hai
 
 
         // Creating Student Object to make student
         Student ajay = new Student();
-        ajay.setId(102);
-        ajay.setName("Abhay");
+        ajay.setId(103);
+        ajay.setName("Akshay");
         ajay.setCity("Lucknow");
         System.out.println(ajay);
 
-        // ab hume  iss object (AJAY) ko save karna hai hibernate mein
-        // toh hum Save() method se kar kar sakte hai , but dikkat ye hai ki , java mein ye save method
-        // kisi na kisi class ke pass hona chahiye or ye static ya non static koi sa bhi method ho sakta hai
-        // toh hum isko direct call nahi karenge ,, ye save method , session ke paas hai
-        // or sessionfactory object mujhe session dega ,, jo bhi current session chal rha hoga
-        // hum uss session ko le lenge session factory se
-        // but hum yaha session ko open kar rhe hai first time ,, isliye open session
-        // but ek baar session open ho gaya toh uske baad get current session bhi use kar sakte hai
-        Session session = sessionFactory.openSession();
 
-        /*
-        // save karne se pehle transaction begin karna padega or fir commit karna padega, physical change karne ke liye
-        session.beginTransaction();
-        // ab session ko bola ki mere object(ajay) ko save kar do
-        session.save(ajay);
-        // ab database mein physically changes karne ke liye , jo transaction chal rha hai usko commit karna padega
-        session.getTransaction().commit();
-        */
-        // aisa bhi kar sakte hai,,, hum session begin kar rhe hai ,, isliye begin transaction
+        // creating object of address class
+        Address address = new Address();
+        address.setStreet("Street1");
+        address.setCity("Haryana");
+        address.setOpen(true);
+        address.setAddedDate(new Date());
+        address.setX(2.2);
+
+        // Reading image
+        try{
+            FileInputStream fileInputStream = new FileInputStream("D:\\java project\\MAVEN\\Maven_first_Project\\icon\\fb.png");
+            byte[] data = new byte[fileInputStream.available() + 1000];
+            fileInputStream.read(data);
+            address.setImage(data);
+        }
+        catch (Exception e){
+            throw new RuntimeException("Image not found");
+        }
+
+
+        // saving the objects
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(ajay);
+        session.save(address);
         transaction.commit();
         session.close();
 
+        System.out.println("Done");
 
 
     }
