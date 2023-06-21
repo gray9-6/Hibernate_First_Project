@@ -24,6 +24,16 @@ public class Student {
     private String city;
 
 
+    // Certification is a class we made ,, and we are going to use their fields in our table,,
+    // with the help of @Embeddable
+    private Certification certification;
+    public Certification getCertification() {
+        return certification;
+    }
+
+    public void setCertification(Certification certification) {
+        this.certification = certification;
+    }
 
     public Student() {
         super();
@@ -65,5 +75,6 @@ public class Student {
     public String toString(){
         return  "Name " + this.name + ", " + "ID " + this.id + ", " + "City " + this.city;
     }
+
 
 }

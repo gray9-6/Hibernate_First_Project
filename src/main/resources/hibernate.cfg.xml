@@ -13,8 +13,8 @@
 
 <!--        ye property automatically table create kar degi ,, or uske baad uss table par agar -->
 <!--        kuch operation perform ho rhe honge usko update bhi kar degi-->
-        <property name="hibernate.hbm2ddl.auto">update</property>
-<!--        <property name="hibernate.hbm2ddl.auto">create</property>-->
+<!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
 <!--        ye property hai SQL ko show karwane ke liye-->
         <property name="show_sql">true</property>
@@ -23,6 +23,7 @@
             samjh jaayega ki mere paas ek class hai ,, jisko as a entity treat karwana hai -->
         <mapping class="org.example.Student"/> <!-- Replace with your own model class -->
         <mapping class="org.example.Address"/> <!-- Replace with your own model class -->
+
 
     </session-factory>
 </hibernate-configuration>
