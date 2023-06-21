@@ -17,7 +17,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Projected Started..." );
+        System.out.println( "Project Started..." );
+
 
 
         // Making Session Factory
@@ -30,15 +31,15 @@ public class App
 
         // Creating Student Object to make student
         Student ajay = new Student();
-        ajay.setId(103);
-        ajay.setName("Akshay");
+        ajay.setId(102);
+        ajay.setName("Abhay");
         ajay.setCity("Lucknow");
         System.out.println(ajay);
 
 
         // creating object of address class
         Address address = new Address();
-        address.setStreet("Street1");
+        address.setStreet("Street2");
         address.setCity("Haryana");
         address.setOpen(true);
         address.setAddedDate(new Date());
@@ -47,7 +48,7 @@ public class App
         // Reading image
         try{
             FileInputStream fileInputStream = new FileInputStream("D:\\java project\\MAVEN\\Maven_first_Project\\icon\\fb.png");
-            byte[] data = new byte[fileInputStream.available() + 1000];
+            byte[] data = new byte[fileInputStream.available()];
             fileInputStream.read(data);
             address.setImage(data);
         }
